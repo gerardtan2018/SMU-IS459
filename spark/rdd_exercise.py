@@ -23,6 +23,12 @@ print('Average Score : ' + str(sum/count))
 
 # Load Parquet file into a data frame
 posts_df = spark.read.load('/user/zzj/parquet-input/hardwarezone.parquet')
+
+posts_df.createOrReplaceTempView("posts")
+sqlDF = spark.sql("SELECT * FROM posts WHERE author='SG_Jimmy'")
+num_post = sqlDF.count()
+print('Jimmy has ' + str(num_post) + ' posts.')
+
 posts_rdd = posts_df.rdd
 
 # Project the author and content columns
