@@ -24,12 +24,6 @@ posts = db.posts
 
 post_contents = pd.DataFrame(list(posts.find({},{
     '_id': False, 
-    'date_published': False, 
-    'post_embedded_url': False,
-    'post_id': False, 
-    'post_images_url': False, 
-    'post_url': False,
-    'posts_replied_to_detail': False
 })))
 
 
