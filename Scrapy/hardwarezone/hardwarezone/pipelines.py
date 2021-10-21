@@ -5,20 +5,20 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
-import pymongo
+# from itemadapter import ItemAdapter
+# import pymongo
 import json
 from kafka import KafkaProducer
 
 
 class HardwarezonePipeline:
     def __init__(self):
-        connection = pymongo.MongoClient(
-            "localhost",
-            27017
-        )
-        db = connection["hardwarezone"]
-        self.collection = db["posts"]
+        # connection = pymongo.MongoClient(
+        #     "localhost",
+        #     27017
+        # )
+        # db = connection["hardwarezone"]
+        # self.collection = db["posts"]
         self.producer = KafkaProducer(bootstrap_servers=['localhost:9092'], \
             value_serializer=lambda v:json.dumps(v).encode('utf-8'))
 
