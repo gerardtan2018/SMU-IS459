@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .models import User,Topic,Post,PostCount
 from .forms import PostForm
+from kafka import KafkaConsumer
+import json
 
 # Create your views here.
 def index(request):
@@ -33,12 +35,17 @@ def uploadPost(request):
 def get_post_count(request):
     labels = []
     data = []
-
-    queryset = PostCount.objects.all()
-
-    for entry in queryset:
-        labels.append(entry.user_name)
-        data.append(entry.post_count)
+    queryset = PostCount.objects.all().order_by('-timestamp')[:10]
+    for record in queryset:
+        print(record)
+        labels.append(record.user_name)
+        data.append(record.post_count)
+        # print(record)
+        # if len(labels) < 10:
+        #     entry = record.value
+        #     print("author:", entry['author'])
+        #     labels.append(entry['author'])
+        #     data.append(entry['count'])
 
     return JsonResponse(data={
         'labels': labels,

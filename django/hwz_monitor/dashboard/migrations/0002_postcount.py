@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
             name='PostCount',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('timestamp', models.DateTimeField()),
                 ('user_name', models.CharField(max_length=200)),
                 ('post_count', models.IntegerField()),
             ],

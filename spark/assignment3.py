@@ -62,7 +62,7 @@ if __name__ == "__main__":
         .withColumn("start", col('window')['start']) \
         .withColumn("end", col('window')['end']) \
         .withColumn("current_timestamp", current_timestamp()) \
-        .filter(cleaned_df.end < cleaned_df.current_timestamp)
+        .filter(cleaned_df.end < cleaned_df.current_timestamp) \
         .orderBy('window', 'count', ascending=False).limit(10)
 
     # #Select the content field and output

@@ -26,8 +26,9 @@ class Post(models.Model):
     content = models.TextField()
 
 class PostCount(models.Model):
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=False)
     user_name = models.CharField(max_length=200)
     post_count = models.IntegerField()
 
     def __str__(self):
-        return self.user_name + " : " + str(self.post_count)
+        return str(self.timestamp) + " - " + self.user_name + " : " + str(self.post_count)

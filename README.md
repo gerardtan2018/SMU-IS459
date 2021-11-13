@@ -1,5 +1,5 @@
-# Assignment 3 Guide
-In this assignment, the goal is to retrieve the top 10 users with most posts and top 10 words in the posts in a window of 2 minutes and trigger of 1 minute
+# Assignment 4 Guide
+In this assignment, the goal is to retrieve the top 10 users window of 2 minutes and trigger of 1 minute and display it on the dashboard
 
 # Setting up Environment
 Start from the base repository folder which is /SMU-IS459. Open a terminal and run the following code below to create an environemnt and install the requirements
@@ -44,19 +44,28 @@ cd Scrapy/hardwarezone
 scrapy runspider hardwarezone/spiders/spider.py
 ```
 
-5. Observe the results in the console/terminal in step 3 (TERMINAL 3)
+5. Run Kafka consumer
+```
+# TERMINAL 5
+source .env/bin/activate
+cd django/hwz_monitor/
+python3 consumer.py
+```
 
-## Additional helper codes (Do not need to run if there is no need to)
-### Remove checkpoint and recreate checkpoint folder
+6. Run Django
 ```
-hadoop fs -rm -r /gerard_tan/spark/stream/checkpoint/author_count
-hadoop fs -rm -r /gerard_tan/spark/stream/checkpoint/word_count
-hadoop fs -mkdir /gerard_tan/spark/stream/checkpoint/author_count
-hadoop fs -mkdir /gerard_tan/spark/stream/checkpoint/word_count
+# TERMINAL 6
+source .env/bin/activate
+cd django/hwz_monitor/
+python3 manage.py runserver
 ```
+
+7. Open Django Dashboard in a Browser at: http://localhost:8000/dashboard/barchart
+
+
 
 ### Delete scrapy-output topic from kafka (zookeeper and kafka needs to be started)
 ```
 cd ~/kafka_2.12-2.8.0/
-bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --delete --topic scrapy-output
+bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --delete --topic dashboard_author
 ```
