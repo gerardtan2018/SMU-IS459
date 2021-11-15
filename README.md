@@ -6,7 +6,7 @@ I have also added another field to the PostCount model called "timestamp" which 
 
 I then created another a [consumer.py](django/hwz_monitor/consumer.py) file which will consume the messages from the topic "dashboard_author" and save it into db.sqlite3. On top of the user_name and post_count, I will also be saving the timestamp which I got from Assignment 3. This timestamp is something I generated in Assignment 3 as seen in line 98 of [kafka_wordcount.py](spark/kafka_wordcount.py).
 
-In the [views.py](django/hwz_monitor/dashboard/views.py) file, the only thing I changed is seen in tne snippet below. Instead of pulling all the objects, I will be pulling only the latest 10 post according to the timestamp.
+In the [views.py](django/hwz_monitor/dashboard/views.py) file, the only thing I changed is seen in tne snippet below. Instead of pulling all the objects, I will be pulling only the latest 10 post according to the timestamp. So even if there is no consumer running, I will still be pulling the latest 10 post which is stored inside db.sqlite3.
 ```
 queryset = PostCount.objects.all().order_by('-timestamp')[:10]
 ```
