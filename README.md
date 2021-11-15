@@ -57,7 +57,7 @@ cd Scrapy/hardwarezone
 scrapy runspider hardwarezone/spiders/spider.py
 ```
 
-5. Run Kafka consumer
+5. Run Kafka consumer in another terminal
 ```
 # TERMINAL 5
 source .env/bin/activate
@@ -65,7 +65,7 @@ cd django/hwz_monitor/
 python3 consumer.py
 ```
 
-6. Run Django
+6. Run Django in another terminal
 ```
 # TERMINAL 6
 source .env/bin/activate
@@ -74,7 +74,6 @@ python3 manage.py runserver
 ```
 
 7. Open Django Dashboard in a Browser at: http://localhost:8000/dashboard/barchart
-
 
 
 ### Delete scrapy-output topic from kafka (zookeeper and kafka needs to be started)
