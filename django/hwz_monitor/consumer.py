@@ -1,6 +1,8 @@
 from kafka import KafkaConsumer
 import json
 import os
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning) 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hwz_monitor.settings")
 from django.core.wsgi import get_wsgi_application
 

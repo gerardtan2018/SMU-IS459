@@ -106,10 +106,6 @@ if __name__ == "__main__":
     # ==================================================================================
     # Assignment 4: Send author counts to message queue in Kafka
     # ==================================================================================
-    # query = author_count.writeStream.foreachBatch(write_mongo_row).start()
-    # query.awaitTermination()
-    
-
     dashboard_df = author_count.select(['current_timestamp', 'author', 'count'])
     author_count_content =  dashboard_df \
         .selectExpr("CAST(current_timestamp as STRING) AS key", "to_json(struct(*)) AS value") \
